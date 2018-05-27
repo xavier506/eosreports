@@ -224,7 +224,7 @@ docker-compose up
 
 ## About EOS Costa Rica
 
-EOS Blockchain is aiming to become a decentralized operating system which can support industrial-scale decentralized applications.
+EOS Blockchain is aiming to become a decentralized operating system which can support large-scale decentralized applications.
 
 EOS Costa Rica supports the global and local open source efforts and development communities by maintaining and contribute to open source initiatives, meetups and workshops.
 
