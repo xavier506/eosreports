@@ -41,7 +41,7 @@
     "dotenv": "^4.0.0",
     "front-matter": "^2.0.5",
     "fs-extra": "^3.0.1",
-    "gh-pages": "^1.1.0",
+    "gh-pages-deploy": "0.4.2",
     "glob": "^5.0.14",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^4.0.0",
@@ -64,7 +64,16 @@
   "scripts": {
     "start": "npm run gulp",
     "build": "npm run gulp build",
-    "deploy": "cross-env BASE_URL=\"/eosreports/\" npm run build && gh-pages -d dist",
-    "gulp": "gulp --gulpfile build/gulpfile.js"
+    "build:prod": "cross-env BASE_URL=\"https://eosreports.com/\" npm run build",
+    "gulp": "gulp --gulpfile build/gulpfile.js",
+    "deploy": "gh-pages-deploy"
+  },
+  "gh-pages-deploy": {
+    "staticpath": "dist",
+    "cname": "eosreports.com",
+    "prep": [
+      "build:prod"
+    ],
+    "noprompt": false
   }
 }
