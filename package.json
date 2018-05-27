@@ -66,14 +66,11 @@
     "build": "npm run gulp build",
     "build:prod": "cross-env BASE_URL=\"https://eosreports.com/\" npm run build",
     "gulp": "gulp --gulpfile build/gulpfile.js",
-    "deploy": "gh-pages-deploy"
+    "deploy": "npm run build:prod && gh-pages-deploy"
   },
   "gh-pages-deploy": {
     "staticpath": "dist",
     "cname": "eosreports.com",
-    "prep": [
-      "build:prod"
-    ],
     "noprompt": false
   }
 }
