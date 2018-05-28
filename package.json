@@ -65,8 +65,9 @@
   "scripts": {
     "start": "npm run gulp",
     "build": "npm run gulp build",
-    "build:prod": "cross-env BASE_URL=\"https://eosreports.com/\" npm run build",
+    "build:prod": "rimraf ./dist && cross-env BASE_URL=\"https://eosreports.com/\" npm run build",
+    "build:cname": "echo 'eosreports.com' >> ./dist/CNAME",
     "gulp": "gulp --gulpfile build/gulpfile.js",
-    "deploy": "npm run build:prod && npm run gulp deploy"
+    "deploy": "npm run build:prod && npm run build:cname && npm run gulp deploy"
   }
 }
