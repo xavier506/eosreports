@@ -1125,6 +1125,20 @@ $(function() {
 	});
 
 });
+//LoginForm validation
+$(function() {
+	if (!$('.form-control').length) {
+        return false;
+    }
+
+    $('.form-control').focus(function() {
+		$(this).siblings('.input-group-addon').addClass('focus');
+	});
+
+	$('.form-control').blur(function() {
+		$(this).siblings('.input-group-addon').removeClass('focus');
+	});
+});
 $(function(){
 
 	// set sortable options
@@ -1204,43 +1218,6 @@ $(function() {
     });
 
 });
-//LoginForm validation
-$(function() {
-	if (!$('.form-control').length) {
-        return false;
-    }
-
-    $('.form-control').focus(function() {
-		$(this).siblings('.input-group-addon').addClass('focus');
-	});
-
-	$('.form-control').blur(function() {
-		$(this).siblings('.input-group-addon').removeClass('focus');
-	});
-});
-var modalMedia = {
-	$el: $("#modal-media"),
-	result: {},
-	options: {},
-	open: function(options) {
-		options = options || {};
-		this.options = options;
-
-
-		this.$el.modal('show');
-	},
-	close: function() {
-		if ($.isFunction(this.options.beforeClose)) {
-			this.options.beforeClose(this.result);
-		}
-
-		this.$el.modal('hide');
-
-		if ($.isFunction(this.options.afterClose)) {
-			this.options.beforeClose(this.result);
-		}
-	}
-};
 // Animating dropdowns is temporary disabled
 // Please feel free to send a pull request :)
 
@@ -1411,6 +1388,29 @@ $(function () {
 	}
 
 });
+var modalMedia = {
+	$el: $("#modal-media"),
+	result: {},
+	options: {},
+	open: function(options) {
+		options = options || {};
+		this.options = options;
+
+
+		this.$el.modal('show');
+	},
+	close: function() {
+		if ($.isFunction(this.options.beforeClose)) {
+			this.options.beforeClose(this.result);
+		}
+
+		this.$el.modal('hide');
+
+		if ($.isFunction(this.options.afterClose)) {
+			this.options.beforeClose(this.result);
+		}
+	}
+};
 $(function() {
 
 	$("body").addClass("loaded");
