@@ -309,12 +309,6 @@ pre {
   border: none;
   background: none; }
 
-.animated {
-  -webkit-animation-duration: .5s;
-          animation-duration: .5s;
-  -webkit-animation-delay: .1s;
-          animation-delay: .1s; }
-
 .alert {
   background-image: none; }
   .alert.alert-primary {
@@ -365,6 +359,12 @@ pre {
       border-top-color: #0b1115; }
     .alert.alert-inverse .alert-link {
       color: #e6e6e6; }
+
+.animated {
+  -webkit-animation-duration: .5s;
+          animation-duration: .5s;
+  -webkit-animation-delay: .1s;
+          animation-delay: .1s; }
 
 .btn {
   background-image: none;
@@ -836,6 +836,13 @@ pre {
 .card-footer {
   background-color: #fafafa; }
 
+.easy-pie-chart {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  background-color: #d7dde4;
+  border-radius: 5px; }
+
 .dropdown-menu {
   float: left;
   -webkit-box-shadow: 2px 3px 6px rgba(126, 142, 159, 0.1);
@@ -858,13 +865,6 @@ pre {
       color: #85CE36 !important;
       background: none;
       background-color: whitesmoke; }
-
-.easy-pie-chart {
-  width: 50px;
-  height: 50px;
-  display: inline-block;
-  background-color: #d7dde4;
-  border-radius: 5px; }
 
 .flex-row {
   display: -webkit-box;
@@ -891,89 +891,6 @@ pre {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center; }
-
-.images-container::after {
-  display: block;
-  clear: both;
-  content: ""; }
-
-.images-container .image-container {
-  float: left;
-  padding: 3px;
-  margin-right: 10px;
-  margin-bottom: 35px;
-  position: relative;
-  border: 1px solid #e6eaee;
-  overflow: hidden; }
-  .images-container .image-container.active {
-    border-color: #85CE36; }
-  .images-container .image-container:hover .controls {
-    bottom: 0;
-    opacity: 1; }
-
-.images-container .controls {
-  position: absolute;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  bottom: -35px;
-  text-align: center;
-  height: 35px;
-  font-size: 24px;
-  -webkit-transition: bottom 0.2s ease, opacity 0.2s ease;
-  transition: bottom 0.2s ease, opacity 0.2s ease;
-  background-color: #fff; }
-  .images-container .controls::after {
-    display: block;
-    clear: both;
-    content: ""; }
-  .images-container .controls .control-btn {
-    display: inline-block;
-    color: #4f5f6f;
-    cursor: pointer;
-    width: 35px;
-    height: 35px;
-    line-height: 35px;
-    text-align: center;
-    opacity: 0.5;
-    -webkit-transition: opacity 0.3s ease;
-    transition: opacity 0.3s ease; }
-    .images-container .controls .control-btn:hover {
-      opacity: 1; }
-    .images-container .controls .control-btn.move {
-      cursor: move; }
-    .images-container .controls .control-btn.star {
-      color: #FFB300; }
-      .images-container .controls .control-btn.star i:before {
-        content: "\f006"; }
-      .images-container .controls .control-btn.star.active i:before {
-        content: "\f005"; }
-    .images-container .controls .control-btn.remove {
-      color: #FF4444; }
-
-.images-container .image {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 130px;
-  height: 135px;
-  line-height: 135px;
-  text-align: center; }
-
-.images-container .image-container.main {
-  border-color: #FFB300; }
-
-.images-container .image-container.new {
-  opacity: 0.6;
-  -webkit-transition: opacity 0.3s ease;
-  transition: opacity 0.3s ease;
-  border-style: dashed;
-  border: 1px #85CE36 solid;
-  color: #85CE36; }
-  .images-container .image-container.new .image {
-    font-size: 2.5rem; }
-  .images-container .image-container.new:hover {
-    opacity: 1; }
 
 input,
 textarea {
@@ -1138,6 +1055,89 @@ label,
 .form-control:-ms-input-placeholder {
   font-style: italic;
   color: #d7dde4; }
+
+.images-container::after {
+  display: block;
+  clear: both;
+  content: ""; }
+
+.images-container .image-container {
+  float: left;
+  padding: 3px;
+  margin-right: 10px;
+  margin-bottom: 35px;
+  position: relative;
+  border: 1px solid #e6eaee;
+  overflow: hidden; }
+  .images-container .image-container.active {
+    border-color: #85CE36; }
+  .images-container .image-container:hover .controls {
+    bottom: 0;
+    opacity: 1; }
+
+.images-container .controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  bottom: -35px;
+  text-align: center;
+  height: 35px;
+  font-size: 24px;
+  -webkit-transition: bottom 0.2s ease, opacity 0.2s ease;
+  transition: bottom 0.2s ease, opacity 0.2s ease;
+  background-color: #fff; }
+  .images-container .controls::after {
+    display: block;
+    clear: both;
+    content: ""; }
+  .images-container .controls .control-btn {
+    display: inline-block;
+    color: #4f5f6f;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    opacity: 0.5;
+    -webkit-transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease; }
+    .images-container .controls .control-btn:hover {
+      opacity: 1; }
+    .images-container .controls .control-btn.move {
+      cursor: move; }
+    .images-container .controls .control-btn.star {
+      color: #FFB300; }
+      .images-container .controls .control-btn.star i:before {
+        content: "\f006"; }
+      .images-container .controls .control-btn.star.active i:before {
+        content: "\f005"; }
+    .images-container .controls .control-btn.remove {
+      color: #FF4444; }
+
+.images-container .image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 130px;
+  height: 135px;
+  line-height: 135px;
+  text-align: center; }
+
+.images-container .image-container.main {
+  border-color: #FFB300; }
+
+.images-container .image-container.new {
+  opacity: 0.6;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  border-style: dashed;
+  border: 1px #85CE36 solid;
+  color: #85CE36; }
+  .images-container .image-container.new .image {
+    font-size: 2.5rem; }
+  .images-container .image-container.new:hover {
+    opacity: 1; }
 
 /* *******************************************
 *		  Item List general styles
@@ -1669,6 +1669,17 @@ span a {
               transform: inherit;
       margin: 40px auto; } }
 
+.wyswyg {
+  border: 1px solid #d7dde4; }
+  .wyswyg .ql-container {
+    border-top: 1px solid #d7dde4; }
+  .wyswyg .toolbar .btn {
+    margin: 0; }
+  .wyswyg .ql-container {
+    font-size: 1rem; }
+    .wyswyg .ql-container .ql-editor {
+      min-height: 200px; }
+
 .footer {
   background-color: #fff;
   position: absolute;
@@ -1718,17 +1729,6 @@ span a {
     @media (max-width: 767.98px) {
       .footer .author > ul {
         display: none; } }
-
-.wyswyg {
-  border: 1px solid #d7dde4; }
-  .wyswyg .ql-container {
-    border-top: 1px solid #d7dde4; }
-  .wyswyg .toolbar .btn {
-    margin: 0; }
-  .wyswyg .ql-container {
-    font-size: 1rem; }
-    .wyswyg .ql-container .ql-editor {
-      min-height: 200px; }
 
 .header {
   background-color: #d7dde4;
@@ -2391,67 +2391,6 @@ span a {
       .items-list-page .item-list .item .item-col.item-col-date {
         text-align: left; } }
 
-.table-flip-scroll table {
-  width: 100%; }
-
-@media only screen and (max-width: 800px) {
-  .table-flip-scroll .flip-content:after,
-  .table-flip-scroll .flip-header:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0; }
-  .table-flip-scroll html .flip-content,
-  .table-flip-scroll html .flip-header {
-    -ms-zoom: 1;
-    zoom: 1; }
-  .table-flip-scroll *:first-child + html .flip-content,
-  .table-flip-scroll *:first-child + html .flip-header {
-    -ms-zoom: 1;
-    zoom: 1; }
-  .table-flip-scroll table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    display: block;
-    position: relative; }
-  .table-flip-scroll th,
-  .table-flip-scroll td {
-    margin: 0;
-    vertical-align: top; }
-  .table-flip-scroll th:last-child,
-  .table-flip-scroll td:last-child {
-    border-bottom: 1px solid #ddd; }
-  .table-flip-scroll th {
-    border: 0 !important;
-    border-right: 1px solid #ddd !important;
-    width: auto !important;
-    display: block;
-    text-align: right; }
-  .table-flip-scroll td {
-    display: block;
-    text-align: left;
-    border: 0 !important;
-    border-bottom: 1px solid #ddd !important; }
-  .table-flip-scroll thead {
-    display: block;
-    float: left; }
-  .table-flip-scroll thead tr {
-    display: block; }
-  .table-flip-scroll tbody {
-    display: block;
-    width: auto;
-    position: relative;
-    overflow-x: auto;
-    white-space: nowrap; }
-  .table-flip-scroll tbody tr {
-    display: inline-block;
-    vertical-align: top;
-    margin-left: -5px;
-    border-left: 1px solid #ddd; } }
-
 .screenful-page .section {
   text-align: center; }
 
@@ -2535,6 +2474,67 @@ span a {
   background-color: #fff;
   padding-bottom: 1px;
   margin-bottom: 50px; }
+
+.table-flip-scroll table {
+  width: 100%; }
+
+@media only screen and (max-width: 800px) {
+  .table-flip-scroll .flip-content:after,
+  .table-flip-scroll .flip-header:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0; }
+  .table-flip-scroll html .flip-content,
+  .table-flip-scroll html .flip-header {
+    -ms-zoom: 1;
+    zoom: 1; }
+  .table-flip-scroll *:first-child + html .flip-content,
+  .table-flip-scroll *:first-child + html .flip-header {
+    -ms-zoom: 1;
+    zoom: 1; }
+  .table-flip-scroll table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: block;
+    position: relative; }
+  .table-flip-scroll th,
+  .table-flip-scroll td {
+    margin: 0;
+    vertical-align: top; }
+  .table-flip-scroll th:last-child,
+  .table-flip-scroll td:last-child {
+    border-bottom: 1px solid #ddd; }
+  .table-flip-scroll th {
+    border: 0 !important;
+    border-right: 1px solid #ddd !important;
+    width: auto !important;
+    display: block;
+    text-align: right; }
+  .table-flip-scroll td {
+    display: block;
+    text-align: left;
+    border: 0 !important;
+    border-bottom: 1px solid #ddd !important; }
+  .table-flip-scroll thead {
+    display: block;
+    float: left; }
+  .table-flip-scroll thead tr {
+    display: block; }
+  .table-flip-scroll tbody {
+    display: block;
+    width: auto;
+    position: relative;
+    overflow-x: auto;
+    white-space: nowrap; }
+  .table-flip-scroll tbody tr {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: -5px;
+    border-left: 1px solid #ddd; } }
 
 .header .header-block-buttons {
   text-align: center;
