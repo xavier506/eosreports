@@ -173,6 +173,37 @@ $(function() {
 
     $('#login-form').validate(loginValidationSettings);
 })
+//ResetForm validation
+$(function() {
+	if (!$('#reset-form').length) {
+        return false;
+    }
+
+    var resetValidationSettings = {
+	    rules: {
+	        email1: {
+	            required: true,
+	            email: true
+	        }
+	    },
+	    messages: {
+	        email1: {
+	            required: "Please enter email address",
+	            email: "Please enter a valid email address"
+	        }
+	    },
+	    invalidHandler: function() {
+			animate({
+				name: 'shake',
+				selector: '.auth-container > .card'
+			});
+		}
+	}
+
+	$.extend(resetValidationSettings, config.validations);
+
+    $('#reset-form').validate(resetValidationSettings);
+})
 //SignupForm validation
 $(function() {
 	if (!$('#signup-form').length) {
@@ -261,37 +292,6 @@ $(function() {
 
     $('#signup-form').validate(signupValidationSettings);
 });
-//ResetForm validation
-$(function() {
-	if (!$('#reset-form').length) {
-        return false;
-    }
-
-    var resetValidationSettings = {
-	    rules: {
-	        email1: {
-	            required: true,
-	            email: true
-	        }
-	    },
-	    messages: {
-	        email1: {
-	            required: "Please enter email address",
-	            email: "Please enter a valid email address"
-	        }
-	    },
-	    invalidHandler: function() {
-			animate({
-				name: 'shake',
-				selector: '.auth-container > .card'
-			});
-		}
-	}
-
-	$.extend(resetValidationSettings, config.validations);
-
-    $('#reset-form').validate(resetValidationSettings);
-})
 $(function() {
 	animate({
 		name: 'flipInY',
@@ -1139,41 +1139,6 @@ $(function() {
 		$(this).siblings('.input-group-addon').removeClass('focus');
 	});
 });
-$(function(){
-
-	// set sortable options
-	var sortable = new Sortable($('.images-container').get(0), {
-		animation: 150,
-		handle: ".control-btn.move",
-		draggable: ".image-container",
-		onMove: function (evt) {
-			var $relatedElem = $(evt.related);
-
-	        if ($relatedElem.hasClass('add-image')) {
-	        	return false;
-	        }
-	    }
-	});
-
-
-	$controlsButtons = $('.controls');
-
-	$controlsButtonsStar = $controlsButtons.find('.star');
-	$controlsButtonsRemove = $controlsButtons.find('.remove');
-
-	$controlsButtonsStar.on('click',function(e){
-		e.preventDefault();
-
-		$controlsButtonsStar.removeClass('active');
-		$controlsButtonsStar.parents('.image-container').removeClass('main');
-
-		$(this).addClass('active');
-
-		$(this).parents('.image-container').addClass('main');
-	})
-
-})
-
 $(function() {
 
     if (!$('#select-all-items').length) {
@@ -1218,6 +1183,41 @@ $(function() {
     });
 
 });
+$(function(){
+
+	// set sortable options
+	var sortable = new Sortable($('.images-container').get(0), {
+		animation: 150,
+		handle: ".control-btn.move",
+		draggable: ".image-container",
+		onMove: function (evt) {
+			var $relatedElem = $(evt.related);
+
+	        if ($relatedElem.hasClass('add-image')) {
+	        	return false;
+	        }
+	    }
+	});
+
+
+	$controlsButtons = $('.controls');
+
+	$controlsButtonsStar = $controlsButtons.find('.star');
+	$controlsButtonsRemove = $controlsButtons.find('.remove');
+
+	$controlsButtonsStar.on('click',function(e){
+		e.preventDefault();
+
+		$controlsButtonsStar.removeClass('active');
+		$controlsButtonsStar.parents('.image-container').removeClass('main');
+
+		$(this).addClass('active');
+
+		$(this).parents('.image-container').addClass('main');
+	})
+
+})
+
 // Animating dropdowns is temporary disabled
 // Please feel free to send a pull request :)
 
