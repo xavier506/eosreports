@@ -48,6 +48,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^5.0.0",
     "gulp-flatten": "^0.3.1",
+    "gulp-gh-pages": "^0.5.4",
     "gulp-load-plugins": "^1.5.0",
     "gulp-prettify": "^0.5.0",
     "gulp-rename": "^1.2.2",
@@ -66,11 +67,6 @@
     "build": "npm run gulp build",
     "build:prod": "cross-env BASE_URL=\"https://eosreports.com/\" npm run build",
     "gulp": "gulp --gulpfile build/gulpfile.js",
-    "deploy": "npm run build:prod && gh-pages-deploy"
-  },
-  "gh-pages-deploy": {
-    "staticpath": "dist",
-    "cname": "eosreports.com",
-    "noprompt": false
+    "deploy": "npm run build:prod && npm run gulp deploy"
   }
 }
