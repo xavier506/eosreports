@@ -29,13 +29,11 @@ Data visualizations to help you make sense of the EOS blockchain.
 
 [eosreports.com](http://eosreports.com)
 
----
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Contents
 
 * [Getting Started](#getting-started)
 * [Contributing](#contributing)
