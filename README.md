@@ -56,7 +56,7 @@ Data visualizations to help you make sense of the EOS blockchain.
 
 eosreports is a web based application that allows people to visualize and analyze real-time and historical data of the EOS blockchain and specific EOS nodes.
 
-It is a 100% open-source and community-driven project and we welcome contributions of all sorts. There are many ways to help, from reporting issues, contributing code, and helping us improve our community.
+It is a 100% open-source and community-driven project and we welcome contributions of all sorts. There are many ways to help, from reporting issues, improving documentation, contributing code, design/ux proposal and helping us improve our community.
 
 The main communication channels for organizing and collaborating are this repository and the [EOS Costa Rica Discord server](https://discord.gg/bBpQHym). Feel to join and ask as many questions you may have.
 
