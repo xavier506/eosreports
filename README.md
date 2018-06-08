@@ -66,7 +66,7 @@ The project lead is [@gaboesquivel](https://github.com/gaboesquivel).
 
 Read the [contributing guidelines](CONTRIBUTING.md) for details.
 
-There a many reasons to get involved in an open source project like this one. If haven't participated in an open source project before and you are still not sure whether you should, this is presentation is for you. [gaboesquivel.com/slides/eoscostarica-oss.pdf](gaboesquivel.com/slides/eoscostarica-oss.pdf)
+There a many reasons to get involved in an open source project like this one. If haven't participated in an open source project before and you are still not sure whether you should, this is presentation is for you. [eoscostarica-oss.pdf](gaboesquivel.com/slides/eoscostarica-oss.pdf)
 
 ## Bug Reporting
 
