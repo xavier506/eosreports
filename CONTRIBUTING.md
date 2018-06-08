@@ -1,19 +1,22 @@
 # Contributing
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 ## Contents
 
-- [Reporting bugs](#reporting-bugs)
-- [Git Workflow](#git-workflow)
-- [Pull Request General Guidelines](#pull-request-general-guidelines)
-  - [Commit Standards](#commit-standards)
-  - [Working on Your First Pull Request?](#working-on-your-first-pull-request)
-- [Advanced Git tools](#advanced-git-tools)
-- [Version Numbers](#version-numbers)
-    - [Breaking.Feature.Fix](#breakingfeaturefix)
-      - [Breaking](#breaking)
-      - [Feature](#feature)
-      - [Fix](#fix)
+* [Reporting bugs](#reporting-bugs)
+* [Git Workflow](#git-workflow)
+* [Pull Request General Guidelines](#pull-request-general-guidelines)
+    * [Commit Standards](#commit-standards)
+    * [Working on Your First Pull Request?](#working-on-your-first-pull-request)
+* [Advanced Git tools](#advanced-git-tools)
+* [Version Numbers](#version-numbers)
+    * [Breaking.Feature.Fix](#breakingfeaturefix)
+        * [Breaking](#breaking)
+        * [Feature](#feature)
+        * [Fix](#fix)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -33,8 +36,9 @@ Bug reports should contain the following information:
 * References: Links to any related tickets or information sources.
 * If possible, attach visual documentation of the bug. Screenshot or animated gif
 
-## Git Workflow
-At EOS Costa Rica we use Github Flow https://guides.github.com/introduction/flow/
+## Development Process
+
+At EOS Costa Rica we use Github's Projects board to prioritize the work and the standard Github Flow https://guides.github.com/introduction/flow/ for code changes.
 
 ![](https://gaboesquivel.com/img/2018/05/github-flow.png)
 
@@ -57,7 +61,8 @@ At EOS Costa Rica we use Github Flow https://guides.github.com/introduction/flow
 * Provide a short commit message in the first line (50-100 character). Looking at the output of `gitk` or `git log --oneline` might help you understand why.
 
 ### Working on Your First Pull Request?
-You can learn how from this *free* series [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github)
+
+You can learn how from this _free_ series [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github)
 
 ## Advanced Git tools
 
@@ -67,7 +72,6 @@ You can leverage these tools to contribute to this repository.
 ## Version Numbers
 
 [Semver](http://semver.org), except the version roles have the semantic names, "Breaking.Feature.Fix" instead of "Major.Minor.Patch".
-
 
 #### Breaking.Feature.Fix
 
