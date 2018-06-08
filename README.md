@@ -60,7 +60,7 @@ eosreports is a web based application that allows people to visualize and analyz
 
 It is a 100% open-source and community-driven project and we welcome contributions of all sorts. There are many ways to help, from reporting issues, contributing code, and helping us improve our community.
 
-The main communication channels for organizing and collaborating are this repository and the EOS Costa Rica Discord server. https://discord.gg/bBpQHym. Feel to join and ask as many questions you may have.
+The main communication channels for organizing and collaborating are this repository and the [EOS Costa Rica Discord server](https://discord.gg/bBpQHym). Feel to join and ask as many questions you may have.
 
 The project lead is [@gaboesquivel](https://github.com/gaboesquivel).
 
