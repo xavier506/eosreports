@@ -1,44 +1,43 @@
 $(function() {
+  if (!$('#select-all-items').length) {
+    return false
+  }
 
-    if (!$('#select-all-items').length) {
-        return false;
-    }
+  $('#select-all-items').on('change', function() {
+    var $this = $(this)
+      .children(':checkbox')
+      .get(0)
 
+    $(this)
+      .parents('li')
+      .siblings()
+      .find(':checkbox')
+      .prop('checked', $this.checked)
+      .val($this.checked)
+      .change()
+  })
 
-    $('#select-all-items').on('change', function() {
-        var $this = $(this).children(':checkbox').get(0);    
+  function drawItemsListSparklines() {
+    $('.items-list-page .sparkline').each(function() {
+      var type = $(this).data('type')
 
-        $(this).parents('li')
-            .siblings()
-            .find(':checkbox')
-            .prop('checked', $this.checked)
-            .val($this.checked)
-            .change();
-    });
+      // Generate random data
+      var data = []
+      for (var i = 0; i < 17; i++) {
+        data.push(Math.round(100 * Math.random()))
+      }
 
+      $(this).sparkline(data, {
+        barColor: config.chart.colorPrimary.toString(),
+        height: $(this).height(),
+        type: type
+      })
+    })
+  }
 
-    function drawItemsListSparklines(){
-        $(".items-list-page .sparkline").each(function() {
-            var type = $(this).data('type');
+  drawItemsListSparklines()
 
-            // Generate random data
-            var data = [];
-            for (var i = 0; i < 17; i++) {
-                data.push(Math.round(100 * Math.random()));
-            }
-
-            $(this).sparkline(data, {
-                barColor: config.chart.colorPrimary.toString(),
-                height: $(this).height(),
-                type: type
-            });
-        });
-    }
-
-    drawItemsListSparklines();
-
-    $(document).on("themechange", function(){
-        drawItemsListSparklines();
-    });
-
-});
+  $(document).on('themechange', function() {
+    drawItemsListSparklines()
+  })
+})

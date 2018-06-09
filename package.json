@@ -1,7 +1,8 @@
 {
   "name": "eosreports",
   "version": "0.1.0",
-  "description": "EOS Reports: Data visualizations to help you make sense of the EOS blockchain.",
+  "description":
+    "EOS Reports: Data visualizations to help you make sense of the EOS blockchain.",
   "repository": {
     "type": "git",
     "url": "https://github.com/eoscostarica/eosreports.git"
@@ -60,14 +61,59 @@
     "handlebars-registrar": "^1.5.2",
     "main-bower-files": "^2.9.0",
     "through2": "^2.0.0",
-    "vinyl": "^2.0.2"
+    "vinyl": "^2.0.2",
+    "eslint": "4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.1.0",
+    "prettier": "1.12.1",
+    "prettier-eslint-cli": "^4.7.1"
   },
   "scripts": {
     "start": "npm run gulp",
     "build": "npm run gulp build",
-    "build:prod": "rimraf ./dist && cross-env BASE_URL=\"https://eosreports.com/\" npm run build",
+    "build:prod":
+      "rimraf ./dist && cross-env BASE_URL=\"https://eosreports.com/\" npm run build",
     "build:cname": "echo 'eosreports.com' >> ./dist/CNAME",
     "gulp": "gulp --gulpfile build/gulpfile.js",
-    "deploy": "npm run build:prod && npm run build:cname && npm run gulp deploy"
+    "deploy":
+      "npm run build:prod && npm run build:cname && npm run gulp deploy",
+    "lint": "eslint \"src/**/*.js\" \"config/**/*.js\" \"build/**/*.js\"",
+    "format":
+      "prettier-eslint --write \"src/**/*.js\" \"config/**/*.js\" \"build/**/*.js\"",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.js": ["prettier --write", "eslint --fix", "git add"],
+    "config/**/*.js": ["prettier --write", "eslint --fix", "git add"],
+    "build/**/*.js": ["prettier --write", "eslint --fix", "git add"]
+  },
+  "eslintConfig": {
+    "globals": {
+      "env": true,
+      "$": true,
+      "NProgress": true,
+      "tinycolor": true,
+      "config": true
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "extends": ["plugin:prettier/recommended", "standard"],
+    "rules": {
+      "prettier/prettier": "error"
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   }
 }
