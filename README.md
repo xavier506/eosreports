@@ -25,7 +25,8 @@
 
 # EOS Reports
 
-Data visualizations to help you make sense of the EOS blockchain.
+Data visualizations to help you make sense of the EOS blockchain.  
+The EOS Reports site will host data visualization tooling for EOS Nodes, EOS Blockchain and EOS dApps.
 
 [eosreports.com](http://eosreports.com)
 
@@ -60,11 +61,13 @@ It is a 100% open-source and community-driven project and we welcome contributio
 
 The main communication channels for organizing and collaborating are this repository and the [EOS Costa Rica Discord server](https://discord.gg/bBpQHym). Feel to join and ask as many questions you may have.
 
-The project lead is [@gaboesquivel](https://github.com/gaboesquivel).
-
 ## Contributing
 
 Read the [contributing guidelines](CONTRIBUTING.md) for details.
+
+We use a Kanban-style board with built-in triggers to automatically move issues and pull requests across To do, In progress and Done columns. That's were we prioritize the work. [Go to Project Board](https://github.com/eoscostarica/eosreports/projects/1).
+
+We follow the [open source collaborative ettiquete](https://github.com/rstacruz/collaborative-etiquette/blob/master/README.md#top) and the [standardjs code style](https://standardjs.com).
 
 There a many reasons to get involved in an open source project like this one. If haven't participated in an open source project before and you are still not sure whether you should, this is presentation is for you. [eoscostarica-oss.pdf](https://gaboesquivel.com/slides/eoscostarica-oss.pdf)
 
@@ -83,14 +86,6 @@ Please report bugs big and small by [opening an issue](issues/new). No possible 
 ### Phase 2
 
 * TBP
-
-## Contributing
-
-Read the [contributing guidelines](CONTRIBUTING.md) for details.
-
-## Bug Reporting
-
-Please report bugs big and small by [opening an issue](issues/new). No possible bug report is too small.
 
 ## Local Setup
 
