@@ -1,16 +1,13 @@
-$(function() {
-
-	$("body").addClass("loaded");
-
-});
-
+$(function () {
+  $('body').addClass('loaded')
+})
 
 /***********************************************
-*        NProgress Settings
-***********************************************/
+ *        NProgress Settings
+ ***********************************************/
 
 // start load bar
-NProgress.start();
+NProgress.start()
 
-// end loading bar 
-NProgress.done();
+// end loading bar
+NProgress.done()

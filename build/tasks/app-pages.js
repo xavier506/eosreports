@@ -1,213 +1,205 @@
-var path 	= require('path');
-var glob 	= require('glob');
-var fs 		= require('fs-extra');
-var through = require('through2');
-var File = require('vinyl');
-var StringDecoder = require('string_decoder').StringDecoder;
-var extend 	= require('util')._extend;
-var dotenv = require('dotenv');
+var path = require('path')
+var fs = require('fs-extra')
+var through = require('through2')
+var File = require('vinyl')
+var extend = require('util')._extend
+var dotenv = require('dotenv')
 
-var frontMatter = require('front-matter');
-var handlebars = require('handlebars');
-var handlebarsRegistrar = require('handlebars-registrar');
+var frontMatter = require('front-matter')
+var handlebars = require('handlebars')
+var handlebarsRegistrar = require('handlebars-registrar')
 
-var config 	= require('../../config');
-var partials = {};
+var config = require('../../config')
+var partials = {}
 
-module.exports.task = function(gulp, plugins, paths) {
+module.exports.task = function (gulp, plugins, paths) {
+  // Register handlebars engine helpers and partials
+  handlebarsRegistrar(handlebars, {
+    helpers: paths.app.helpers,
+    partials: paths.app.templates,
+    parsePartialName: function (partial) {
+      // Save in partials vinyl registry
+      partials[partial.shortPath] = new File({
+        cwd: partial.cwd,
+        path: partial.path,
+        base: path.basename(partial.path),
+        contents: fs.readFileSync(partial.path)
+      })
 
+      return partial.shortPath
+    },
+    bustCache: true
+  })
 
-	// Register handlebars engine helpers and partials
-	handlebarsRegistrar(handlebars, {
-		helpers: paths.app.helpers,
-		partials: paths.app.templates,
-		parsePartialName: function (partial) {
+  gulp
+    .src(paths.app.pages)
+    // Render pages
+    .pipe(
+      through.obj(function (file, enc, cb) {
+        file.contents = new Buffer(renderTemplate(file))
 
-			// Save in partials vinyl registry
-			partials[partial.shortPath] = new File({
-				cwd: partial.cwd,
-				path: partial.path,
-				base: path.basename(partial.path),
-				contents: fs.readFileSync(partial.path)
-			});
+        this.push(file)
+        cb()
+      })
+    )
+    // Handle errors
+    .on('error', plugins.util.log)
 
-			return partial.shortPath;
-		},
-		bustCache: true,
-	});
+    // Rename .page.hbs to .html
+    .pipe(
+      plugins.rename(function (path) {
+        path.basename = path.basename.replace('-page', '')
+        path.extname = '.html'
+      })
+    )
 
+    // Flatten structure
+    .pipe(plugins.flatten())
 
-	gulp.src(paths.app.pages)
-		// Render pages
-		.pipe(through.obj(function (file, enc, cb) {
-			file.contents = new Buffer(renderTemplate(file));
+    // pretify html structure
+    .pipe(
+      plugins.prettify({
+        indent_size: 4
+      })
+    )
 
-			this.push(file);
-			cb();
-		}))
-		// Handle errors
-		.on('error', plugins.util.log)
+    // Output
+    .pipe(gulp.dest(config.destDir))
 
-		// Rename .page.hbs to .html
-		.pipe(plugins.rename(function (path) {
-			path.basename = path.basename.replace("-page", "");
-			path.extname = ".html"
-		}))
-
-		// Flatten structure
-		.pipe(plugins.flatten())
-
-		// pretify html structure
-		.pipe(plugins.prettify({
-			indent_size: 4
-		}))
-
-		// Output
-		.pipe(gulp.dest(config.destDir))
-
-		//Live-Reload
-		.pipe(plugins.connect.reload());
-
-};
-
+    // Live-Reload
+    .pipe(plugins.connect.reload())
+}
 
 /********************************************
-*				Utils
-*********************************************/
+  Utils
+ *********************************************/
 
-function renderTemplate(file, options) {
+function renderTemplate (file, options) {
+  options = options || {}
 
-	options = options || {};
+  // Set file frontMatter
+  file = setFrontMatter(file)
 
-	// Set file frontMatter
-	file = setFrontMatter(file);
+  // Get context from _context.js files and frontmatter
+  var contextExternal = getPageContextExternal(file)
 
-	// Get context from _context.js files and frontmatter
-	var contextExternal = getPageContextExternal(file);
+  // Frontmatter context
+  var contextTemplate = file.frontMatter || {}
 
-	// Frontmatter context
-	var contextTemplate = file.frontMatter || {};
+  // Inherited context from child
+  var contextInherited = options.contextInherited || {}
 
-	// Inherited context from child
-	var contextInherited = options.contextInherited || {};
+  // Result context
+  var context = extend({}, contextExternal)
+  context = extend(context, contextTemplate)
+  context = extend(context, contextInherited)
 
-	// Result context
-	var	context = extend({}, 	  contextExternal);
-		context = extend(context, contextTemplate);
-		context = extend(context, contextInherited);
+  // Page render result
+  var pageRes = ''
 
-	// Page render result
-	var pageRes = "";
+  // Compile template
+  var template = handlebars.compile(String(file.contents))
+  var templateRes = template(context)
 
-	// Compile template
-	var template = handlebars.compile(String(file.contents));
-	var templateRes = template(context);
+  // Layout processing
+  var layout = context.layout || null
 
-	// Layout processing
-	var layout = context.layout || null;
+  // If the layout exists, render it with template inside
+  if (layout && partials[layout] && handlebars.partials[layout]) {
+    // New instance of context
+    var layoutData = extend({}, context)
 
-	// If the layout exists, render it with template inside
-	if (layout && partials[layout] && handlebars.partials[layout]) {
+    // Add body to context
+    layoutData = extend(layoutData, {
+      body: templateRes
+    })
 
-		// New instance of context
-		var layoutData = extend({}, context);
+    // Remove layout parameter from inhereted context
+    delete layoutData.layout
 
-		// Add body to context
-		layoutData = extend(layoutData, {
-			body: templateRes
-		});
+    // New vinyl file based on partail vinyl
+    var layoutFile = new File(partials[layout])
 
-		// Remove layout parameter from inhereted context
-		delete layoutData.layout;
+    // Call recursively render template again
+    pageRes = renderTemplate(layoutFile, {
+      contextInherited: layoutData
+    })
+  } else {
+    pageRes = templateRes
+  }
 
-		// New vinyl file based on partail vinyl
-		var layoutFile = new File(partials[layout]);
-
-		// Call recursively render template again
-		pageRes = renderTemplate(layoutFile, {
-			contextInherited: layoutData
-		});
-	}
-	// Return rendered template
-	else {
-		pageRes = templateRes;
-	}
-
-	return pageRes;
+  return pageRes
 }
 
-
 /*
-	Frontmatter file
+  Frontmatter file
 */
-function setFrontMatter(file) {
-	// Read content from front matter
-	var content = frontMatter(file.contents.toString('utf8'));
+function setFrontMatter (file) {
+  // Read content from front matter
+  var content = frontMatter(file.contents.toString('utf8'))
 
-	// var res = new Buffer(content.body);
-	file.contents = new Buffer(content.body);
-	file.frontMatter = content.attributes;
+  // var res = new Buffer(content.body);
+  file.contents = new Buffer(content.body)
+  file.frontMatter = content.attributes
 
-	return file;
+  return file
 }
 
-
 /*
-	This function returns context of current page
-	which is root context extended by all contexts untill
-	current level context
+  This function returns context of current page
+  which is root context extended by all contexts untill
+  current level context
 
-	You may also use .env file in root folder
+  You may also use .env file in root folder
 */
 
+function getPageContextExternal (file) {
+  // Initial context
+  var context = {}
 
-function getPageContextExternal(file) {
+  // Environmental variables
+  env =
+    dotenv.config({
+      path: path.resolve(config.rootDir, '.env')
+    }) || {}
 
-	// Initial context
-	var context = {};
+  env.parsed = env.parsed || {}
 
-	// Environmental variables
-	env = dotenv.config({
-		path: path.resolve(config.rootDir, '.env')
-	}) || {};
+  //
+  extend(context, env.parsed)
+  extend(context, process.env)
 
-	env.parsed = env.parsed || {};
+  context.BASE_URL = context.BASE_URL || '/'
 
-	//
-	extend(context, env.parsed);
-	extend(context, process.env)
+  // Package data
+  context.pkg = require('../../package.json')
 
-	context.BASE_URL = context.BASE_URL || '/';
+  var rootDir = path.resolve(config.srcDir)
+  var pageDir = path.dirname(file.path)
 
-	// Package data
-	context.pkg = require('../../package.json');
+  var contextPaths = []
 
-	var rootDir = path.resolve(config.srcDir);
-	var pageDir = path.dirname(file.path);
+  // Start going up from page directory until root directory
+  for (
+    var activeDir = pageDir;
+    activeDir.length >= rootDir.length;
+    activeDir = path.resolve(activeDir, '../')
+  ) {
+    contextPaths.push(path.resolve(activeDir, '_context.js'))
+  }
 
-	var contextPaths = [];
+  // Reverse context, so the iteration will start from root level context
+  contextPaths.reverse()
 
-	// Start going up from page directory until root directory
-	for (var activeDir = pageDir; activeDir.length >= rootDir.length; activeDir = path.resolve(activeDir, '../') ) {
-		contextPaths.push(
-			path.resolve(activeDir, '_context.js')
-		);
-	}
+  contextPaths.map(function (filePath) {
+    if (!fs.pathExistsSync(filePath)) {
+      return false
+    }
 
-	// Reverse context, so the iteration will start from root level context
-	contextPaths.reverse();
+    var localContext = require(filePath)
 
+    extend(context, localContext)
+  })
 
-	contextPaths.map(function(filePath) {
-		if (!fs.pathExistsSync(filePath)) {
-			return false;
-		}
-
-		var localContext = require(filePath);
-
-		extend(context, localContext);
-	});
-
-
-	return context;
-};
+  return context
+}

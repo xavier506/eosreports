@@ -1,155 +1,154 @@
+/* global $ref */
+
 $(function () {
+  // Local storage settings
+  var themeSettings = getThemeSettings()
 
-	// Local storage settings
-	var themeSettings = getThemeSettings();
+  // Elements
 
-	// Elements
+  var $app = $('#app')
+  var $styleLink = $('#theme-style')
+  var $customizeMenu = $('#customize-menu')
 
-	var $app = $('#app');
-	var $styleLink = $('#theme-style');
-	var $customizeMenu = $('#customize-menu');
+  // Color switcher
+  var $customizeMenuColorBtns = $customizeMenu.find('.color-item')
 
-	// Color switcher
-	var $customizeMenuColorBtns = $customizeMenu.find('.color-item');
+  // Position switchers
+  var $customizeMenuRadioBtns = $customizeMenu.find('.radio')
 
-	// Position switchers
-	var $customizeMenuRadioBtns = $customizeMenu.find('.radio');
+  // /////////////////////////////////////////////////
 
+  // Initial state
 
-	// /////////////////////////////////////////////////
+  // On setting event, set corresponding options
 
-	// Initial state
+  // Update customize view based on options
 
-	// On setting event, set corresponding options
+  // Update theme based on options
 
-	// Update customize view based on options
+  /************************************************
+  Initial State
+   *************************************************/
 
-	// Update theme based on options
+  setThemeSettings()
 
-	/************************************************
-	*				Initial State
-	*************************************************/
+  /************************************************
+  Events
+   *************************************************/
 
-	setThemeSettings();
+  // set theme type
+  $customizeMenuColorBtns.on('click', function () {
+    themeSettings.themeName = $(this).data('theme')
 
-	/************************************************
-	*					Events
-	*************************************************/
+    setThemeSettings()
+  })
 
-	// set theme type
-	$customizeMenuColorBtns.on('click', function() {
-		themeSettings.themeName = $(this).data('theme');
+  $customizeMenuRadioBtns.on('click', function () {
+    var optionName = $(this).prop('name')
+    var value = $(this).val()
 
-		setThemeSettings();
-	});
+    themeSettings[optionName] = value
 
+    setThemeSettings()
+  })
 
-	$customizeMenuRadioBtns.on('click', function() {
+  function setThemeSettings () {
+    setThemeState()
+      .delay(config.delayTime)
+      .queue(function (next) {
+        setThemeColor()
+        setThemeControlsState()
+        saveThemeSettings()
 
-		var optionName = $(this).prop('name');
-		var value = $(this).val();
+        $(document).trigger('themechange')
 
-		themeSettings[optionName] = value;
+        next()
+      })
+  }
 
-		setThemeSettings();
-	});
+  /************************************************
+  Update theme based on options
+   *************************************************/
 
-	function setThemeSettings() {
-		setThemeState()
-		.delay(config.delayTime)
-		.queue(function (next) {
+  function setThemeState () {
+    // set theme type
+    if (themeSettings.themeName) {
+      $styleLink.attr('href', 'css/app-' + themeSettings.themeName + '.css')
+    } else {
+      $styleLink.attr('href', 'css/app.css')
+    }
 
-			setThemeColor();
-			setThemeControlsState();
-			saveThemeSettings();
+    // App classes
+    $app.removeClass('header-fixed footer-fixed sidebar-fixed')
 
-			$(document).trigger("themechange");	
-			
-			next();
-		});	
-	}
+    // set header
+    $app.addClass(themeSettings.headerPosition)
 
-	/************************************************
-	*			Update theme based on options
-	*************************************************/
+    // set footer
+    $app.addClass(themeSettings.footerPosition)
 
-	function setThemeState() {
-		// set theme type
-		if (themeSettings.themeName) {
-			$styleLink.attr('href', 'css/app-' + themeSettings.themeName + '.css');
-		}
-		else {
-			$styleLink.attr('href', 'css/app.css');
-		}
+    // set footer
+    $app.addClass(themeSettings.sidebarPosition)
 
-		// App classes
-		$app.removeClass('header-fixed footer-fixed sidebar-fixed');
+    return $app
+  }
 
-		// set header
-		$app.addClass(themeSettings.headerPosition);
+  /************************************************
+  Update theme controls based on options
+   *************************************************/
 
-		// set footer
-		$app.addClass(themeSettings.footerPosition);
+  function setThemeControlsState () {
+    // set color switcher
+    $customizeMenuColorBtns.each(function () {
+      if ($(this).data('theme') === themeSettings.themeName) {
+        $(this).addClass('active')
+      } else {
+        $(this).removeClass('active')
+      }
+    })
 
-		// set footer
-		$app.addClass(themeSettings.sidebarPosition);
+    // set radio buttons
+    $customizeMenuRadioBtns.each(function () {
+      var name = $(this).prop('name')
+      var value = $(this).val()
 
-		return $app;
-	}
+      if (themeSettings[name] === value) {
+        $(this).prop('checked', true)
+      } else {
+        $(this).prop('checked', false)
+      }
+    })
+  }
 
-	/************************************************
-	*			Update theme controls based on options
-	*************************************************/
+  /************************************************
+  Update theme color
+   *************************************************/
+  function setThemeColor () {
+    config.chart.colorPrimary = tinycolor(
+      $ref.find('.chart .color-primary').css('color')
+    )
+    config.chart.colorSecondary = tinycolor(
+      $ref.find('.chart .color-secondary').css('color')
+    )
+  }
 
-	function setThemeControlsState() {
-		// set color switcher
-		$customizeMenuColorBtns.each(function() {
-			if($(this).data('theme') === themeSettings.themeName) {
-				$(this).addClass('active');
-			}
-			else {
-				$(this).removeClass('active');
-			}
-		});
+  /************************************************
+  Storage Functions
+   *************************************************/
 
-		// set radio buttons
-		$customizeMenuRadioBtns.each(function() {
-			var name = $(this).prop('name');
-			var value = $(this).val();
+  function getThemeSettings () {
+    var settings = localStorage.getItem('themeSettings')
+      ? JSON.parse(localStorage.getItem('themeSettings'))
+      : {}
 
-			if (themeSettings[name] === value) {
-				$(this).prop("checked", true );
-			}
-			else {
-				$(this).prop("checked", false );
-			}
-		});
-	}
+    settings.headerPosition = settings.headerPosition || ''
+    settings.sidebarPosition = settings.sidebarPosition || ''
+    settings.footerPosition = settings.footerPosition || ''
 
-	/************************************************
-	*			Update theme color
-	*************************************************/
-	function setThemeColor(){
-		config.chart.colorPrimary = tinycolor($ref.find(".chart .color-primary").css("color"));	
-		config.chart.colorSecondary = tinycolor($ref.find(".chart .color-secondary").css("color"));	
-	}
+    return settings
+  }
 
-	/************************************************
-	*				Storage Functions
-	*************************************************/
-
-	function getThemeSettings() {
-		var settings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) : {};
-
-		settings.headerPosition = settings.headerPosition || '';
-		settings.sidebarPosition = settings.sidebarPosition || '';
-		settings.footerPosition = settings.footerPosition || '';
-
-		return settings;
-	}
-
-	function saveThemeSettings() {
-		localStorage.setItem('themeSettings', JSON.stringify(themeSettings));
-	}
-
-});
+  function saveThemeSettings () {
+    localStorage.setItem('themeSettings', JSON.stringify(themeSettings))
+  }
+})

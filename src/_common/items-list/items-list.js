@@ -1,19 +1,19 @@
-$(function() {
-	var $itemActions = $(".item-actions-dropdown");
+$(function () {
+  var $itemActions = $('.item-actions-dropdown')
 
-	$(document).on('click',function(e) {
-		if (!$(e.target).closest('.item-actions-dropdown').length) {
-			$itemActions.removeClass('active');
-		}
-	});
-	
-	$('.item-actions-toggle-btn').on('click',function(e){
-		e.preventDefault();
+  $(document).on('click', function (e) {
+    if (!$(e.target).closest('.item-actions-dropdown').length) {
+      $itemActions.removeClass('active')
+    }
+  })
 
-		var $thisActionList = $(this).closest('.item-actions-dropdown');
+  $('.item-actions-toggle-btn').on('click', function (e) {
+    e.preventDefault()
 
-		$itemActions.not($thisActionList).removeClass('active');
+    var $thisActionList = $(this).closest('.item-actions-dropdown')
 
-		$thisActionList.toggleClass('active');	
-	});
-});
+    $itemActions.not($thisActionList).removeClass('active')
+
+    $thisActionList.toggleClass('active')
+  })
+})
