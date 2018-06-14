@@ -1,0 +1,20 @@
+---
+extends:
+- standard
+globals:
+  env: true
+  "$": true
+  localStorage: true
+  NProgress: true
+  tinycolor: true
+  config: true
+  ResponsiveBootstrapToolkit: true
+  animate: true
+  Sortable: true
+  "$controlsButtons": true
+  "$controlsButtonsStar": true
+  "$controlsButtonsRemove": true
+  Morris: true
+  removeActionList: true
+rules:
+  node/no-deprecated-api: "warn"

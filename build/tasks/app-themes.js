@@ -2,9 +2,9 @@ var path = require('path')
 var config = require('../../config/')
 var glob = require('glob')
 
-module.exports.task = function(gulp, plugins, paths) {
+module.exports.task = function (gulp, plugins, paths) {
   // For each theme file
-  glob.sync(paths.app.themes).forEach(function(filePath) {
+  glob.sync(paths.app.themes).forEach(function (filePath) {
     // Prepend file to styles glob
     var src = [].concat(paths.app.styles)
     src.unshift(filePath)

@@ -1,11 +1,13 @@
-$(function() {
+/* global setSameHeights */
+
+$(function () {
   var $dashboardSalesBreakdownChart = $('#dashboard-sales-breakdown-chart')
 
   if (!$dashboardSalesBreakdownChart.length) {
     return false
   }
 
-  function drawSalesChart() {
+  function drawSalesChart () {
     $dashboardSalesBreakdownChart.empty()
 
     Morris.Donut({
@@ -36,7 +38,7 @@ $(function() {
 
   drawSalesChart()
 
-  $(document).on('themechange', function() {
+  $(document).on('themechange', function () {
     drawSalesChart()
   })
 })

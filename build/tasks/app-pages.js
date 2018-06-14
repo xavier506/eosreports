@@ -1,9 +1,7 @@
 var path = require('path')
-var glob = require('glob')
 var fs = require('fs-extra')
 var through = require('through2')
 var File = require('vinyl')
-var StringDecoder = require('string_decoder').StringDecoder
 var extend = require('util')._extend
 var dotenv = require('dotenv')
 
@@ -14,12 +12,12 @@ var handlebarsRegistrar = require('handlebars-registrar')
 var config = require('../../config')
 var partials = {}
 
-module.exports.task = function(gulp, plugins, paths) {
+module.exports.task = function (gulp, plugins, paths) {
   // Register handlebars engine helpers and partials
   handlebarsRegistrar(handlebars, {
     helpers: paths.app.helpers,
     partials: paths.app.templates,
-    parsePartialName: function(partial) {
+    parsePartialName: function (partial) {
       // Save in partials vinyl registry
       partials[partial.shortPath] = new File({
         cwd: partial.cwd,
@@ -37,7 +35,7 @@ module.exports.task = function(gulp, plugins, paths) {
     .src(paths.app.pages)
     // Render pages
     .pipe(
-      through.obj(function(file, enc, cb) {
+      through.obj(function (file, enc, cb) {
         file.contents = new Buffer(renderTemplate(file))
 
         this.push(file)
@@ -49,7 +47,7 @@ module.exports.task = function(gulp, plugins, paths) {
 
     // Rename .page.hbs to .html
     .pipe(
-      plugins.rename(function(path) {
+      plugins.rename(function (path) {
         path.basename = path.basename.replace('-page', '')
         path.extname = '.html'
       })
@@ -73,10 +71,10 @@ module.exports.task = function(gulp, plugins, paths) {
 }
 
 /********************************************
- *				Utils
+  Utils
  *********************************************/
 
-function renderTemplate(file, options) {
+function renderTemplate (file, options) {
   options = options || {}
 
   // Set file frontMatter
@@ -126,9 +124,7 @@ function renderTemplate(file, options) {
     pageRes = renderTemplate(layoutFile, {
       contextInherited: layoutData
     })
-  }
-  // Return rendered template
-  else {
+  } else {
     pageRes = templateRes
   }
 
@@ -136,9 +132,9 @@ function renderTemplate(file, options) {
 }
 
 /*
-	Frontmatter file
+  Frontmatter file
 */
-function setFrontMatter(file) {
+function setFrontMatter (file) {
   // Read content from front matter
   var content = frontMatter(file.contents.toString('utf8'))
 
@@ -150,14 +146,14 @@ function setFrontMatter(file) {
 }
 
 /*
-	This function returns context of current page
-	which is root context extended by all contexts untill
-	current level context
+  This function returns context of current page
+  which is root context extended by all contexts untill
+  current level context
 
-	You may also use .env file in root folder
+  You may also use .env file in root folder
 */
 
-function getPageContextExternal(file) {
+function getPageContextExternal (file) {
   // Initial context
   var context = {}
 
@@ -195,7 +191,7 @@ function getPageContextExternal(file) {
   // Reverse context, so the iteration will start from root level context
   contextPaths.reverse()
 
-  contextPaths.map(function(filePath) {
+  contextPaths.map(function (filePath) {
     if (!fs.pathExistsSync(filePath)) {
       return false
     }

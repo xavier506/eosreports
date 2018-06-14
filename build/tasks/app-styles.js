@@ -1,7 +1,7 @@
 var path = require('path')
 var config = require('../../config/')
 
-module.exports.task = function(gulp, plugins, paths) {
+module.exports.task = function (gulp, plugins, paths) {
   gulp
     .src(paths.app.styles)
     .pipe(plugins.concat('app.scss'))

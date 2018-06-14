@@ -1,15 +1,15 @@
-$(function() {
+$(function () {
   $('#sidebar-menu, #customize-menu').metisMenu({
     activeClass: 'open'
   })
 
-  $('#sidebar-collapse-btn').on('click', function(event) {
+  $('#sidebar-collapse-btn').on('click', function (event) {
     event.preventDefault()
 
     $('#app').toggleClass('sidebar-open')
   })
 
-  $('#sidebar-overlay').on('click', function() {
+  $('#sidebar-overlay').on('click', function () {
     $('#app').removeClass('sidebar-open')
   })
 
@@ -18,12 +18,12 @@ $(function() {
     var $mobileHandle = $('#sidebar-mobile-menu-handle ')
 
     $mobileHandle.swipe({
-      swipeLeft: function() {
+      swipeLeft: function () {
         if ($appContainer.hasClass('sidebar-open')) {
           $appContainer.removeClass('sidebar-open')
         }
       },
-      swipeRight: function() {
+      swipeRight: function () {
         if (!$appContainer.hasClass('sidebar-open')) {
           $appContainer.addClass('sidebar-open')
         }

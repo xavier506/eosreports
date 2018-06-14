@@ -1,10 +1,10 @@
-$(function() {
+$(function () {
   // set sortable options
-  var sortable = new Sortable($('.images-container').get(0), {
+  var sortable = new Sortable($('.images-container').get(0), { /* eslint-disable-line no-unused-vars */
     animation: 150,
     handle: '.control-btn.move',
     draggable: '.image-container',
-    onMove: function(evt) {
+    onMove: function (evt) {
       var $relatedElem = $(evt.related)
 
       if ($relatedElem.hasClass('add-image')) {
@@ -18,7 +18,7 @@ $(function() {
   $controlsButtonsStar = $controlsButtons.find('.star')
   $controlsButtonsRemove = $controlsButtons.find('.remove')
 
-  $controlsButtonsStar.on('click', function(e) {
+  $controlsButtonsStar.on('click', function (e) {
     e.preventDefault()
 
     $controlsButtonsStar.removeClass('active')

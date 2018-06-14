@@ -6,20 +6,20 @@
     {{/is}}
 */
 
-module.exports.register = function(handlebars) {
-  var isArray = function(value) {
+module.exports.register = function (handlebars) {
+  var isArray = function (value) {
     return Object.prototype.toString.call(value) === '[object Array]'
   }
 
-  var ExpressionRegistry = function() {
+  var ExpressionRegistry = function () {
     this.expressions = []
   }
 
-  ExpressionRegistry.prototype.add = function(operator, method) {
+  ExpressionRegistry.prototype.add = function (operator, method) {
     this.expressions[operator] = method
   }
 
-  ExpressionRegistry.prototype.call = function(operator, left, right) {
+  ExpressionRegistry.prototype.call = function (operator, left, right) {
     if (!this.expressions.hasOwnProperty(operator)) {
       throw new Error('Unknown operator "' + operator + '"')
     }
@@ -28,58 +28,58 @@ module.exports.register = function(handlebars) {
   }
 
   var eR = new ExpressionRegistry()
-  eR.add('not', function(left, right) {
-    return left != right
+  eR.add('not', function (left, right) {
+    return left !== right
   })
-  eR.add('>', function(left, right) {
+  eR.add('>', function (left, right) {
     return left > right
   })
-  eR.add('<', function(left, right) {
+  eR.add('<', function (left, right) {
     return left < right
   })
-  eR.add('>=', function(left, right) {
+  eR.add('>=', function (left, right) {
     return left >= right
   })
-  eR.add('<=', function(left, right) {
+  eR.add('<=', function (left, right) {
     return left <= right
   })
 
-  eR.add('==', function(left, right) {
-    return left == right
-  })
-
-  eR.add('===', function(left, right) {
+  eR.add('==', function (left, right) {
     return left === right
   })
-  eR.add('!==', function(left, right) {
+
+  eR.add('===', function (left, right) {
+    return left === right
+  })
+  eR.add('!==', function (left, right) {
     return left !== right
   })
-  eR.add('in', function(left, right) {
+  eR.add('in', function (left, right) {
     if (!isArray(right)) {
       right = right.split(',')
     }
     return right.indexOf(left) !== -1
   })
 
-  var isHelper = function() {
-    var args = arguments,
-      left = args[0],
-      operator = args[1],
-      right = args[2],
-      options = args[3]
+  var isHelper = function () {
+    var args = arguments
+    var left = args[0]
+    var operator = args[1]
+    var right = args[2]
+    var options = args[3]
 
     // console.log(args)
 
-    if (args.length == 2) {
+    if (args.length === 2) {
       options = args[1]
       if (left) return options.fn(this)
       return options.inverse(this)
     }
 
-    if (args.length == 3) {
+    if (args.length === 3) {
       right = args[1]
       options = args[2]
-      if (left == right) return options.fn(this)
+      if (left === right) return options.fn(this)
       return options.inverse(this)
     }
 

@@ -1,5 +1,5 @@
 // LoginForm validation
-$(function() {
+$(function () {
   if (!$('#login-form').length) {
     return false
   }
@@ -21,7 +21,7 @@ $(function() {
       password: 'Please enter password',
       agree: 'Please accept our policy'
     },
-    invalidHandler: function() {
+    invalidHandler: function () {
       animate({
         name: 'shake',
         selector: '.auth-container > .card'

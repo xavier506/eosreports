@@ -1,4 +1,6 @@
-$(function() {
+/* global $ref */
+
+$(function () {
   // Local storage settings
   var themeSettings = getThemeSettings()
 
@@ -25,23 +27,23 @@ $(function() {
   // Update theme based on options
 
   /************************************************
-   *				Initial State
+  Initial State
    *************************************************/
 
   setThemeSettings()
 
   /************************************************
-   *					Events
+  Events
    *************************************************/
 
   // set theme type
-  $customizeMenuColorBtns.on('click', function() {
+  $customizeMenuColorBtns.on('click', function () {
     themeSettings.themeName = $(this).data('theme')
 
     setThemeSettings()
   })
 
-  $customizeMenuRadioBtns.on('click', function() {
+  $customizeMenuRadioBtns.on('click', function () {
     var optionName = $(this).prop('name')
     var value = $(this).val()
 
@@ -50,10 +52,10 @@ $(function() {
     setThemeSettings()
   })
 
-  function setThemeSettings() {
+  function setThemeSettings () {
     setThemeState()
       .delay(config.delayTime)
-      .queue(function(next) {
+      .queue(function (next) {
         setThemeColor()
         setThemeControlsState()
         saveThemeSettings()
@@ -65,10 +67,10 @@ $(function() {
   }
 
   /************************************************
-   *			Update theme based on options
+  Update theme based on options
    *************************************************/
 
-  function setThemeState() {
+  function setThemeState () {
     // set theme type
     if (themeSettings.themeName) {
       $styleLink.attr('href', 'css/app-' + themeSettings.themeName + '.css')
@@ -92,12 +94,12 @@ $(function() {
   }
 
   /************************************************
-   *			Update theme controls based on options
+  Update theme controls based on options
    *************************************************/
 
-  function setThemeControlsState() {
+  function setThemeControlsState () {
     // set color switcher
-    $customizeMenuColorBtns.each(function() {
+    $customizeMenuColorBtns.each(function () {
       if ($(this).data('theme') === themeSettings.themeName) {
         $(this).addClass('active')
       } else {
@@ -106,7 +108,7 @@ $(function() {
     })
 
     // set radio buttons
-    $customizeMenuRadioBtns.each(function() {
+    $customizeMenuRadioBtns.each(function () {
       var name = $(this).prop('name')
       var value = $(this).val()
 
@@ -119,9 +121,9 @@ $(function() {
   }
 
   /************************************************
-   *			Update theme color
+  Update theme color
    *************************************************/
-  function setThemeColor() {
+  function setThemeColor () {
     config.chart.colorPrimary = tinycolor(
       $ref.find('.chart .color-primary').css('color')
     )
@@ -131,10 +133,10 @@ $(function() {
   }
 
   /************************************************
-   *				Storage Functions
+  Storage Functions
    *************************************************/
 
-  function getThemeSettings() {
+  function getThemeSettings () {
     var settings = localStorage.getItem('themeSettings')
       ? JSON.parse(localStorage.getItem('themeSettings'))
       : {}
@@ -146,7 +148,7 @@ $(function() {
     return settings
   }
 
-  function saveThemeSettings() {
+  function saveThemeSettings () {
     localStorage.setItem('themeSettings', JSON.stringify(themeSettings))
   }
 })

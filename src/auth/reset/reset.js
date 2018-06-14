@@ -1,5 +1,5 @@
 // ResetForm validation
-$(function() {
+$(function () {
   if (!$('#reset-form').length) {
     return false
   }
@@ -17,7 +17,7 @@ $(function() {
         email: 'Please enter a valid email address'
       }
     },
-    invalidHandler: function() {
+    invalidHandler: function () {
       animate({
         name: 'shake',
         selector: '.auth-container > .card'

@@ -1,10 +1,12 @@
+/* globals series oilprices exchangerates  */
+
 // Flot Bar Chart
-$(function() {
+$(function () {
   if (!$('#flot-bar-chart').length) {
     return false
   }
 
-  function drawFlotCharts() {
+  function drawFlotCharts () {
     var barOptions = {
       series: {
         bars: {
@@ -42,11 +44,11 @@ $(function() {
         content: 'x: %x, y: %y'
       }
     }
-    var barData = {
+    var barData2 = {
       label: 'bar',
       data: [[1, 34], [2, 25], [3, 19], [4, 34], [5, 32], [6, 44]]
     }
-    $.plot($('#flot-bar-chart'), [barData], barOptions)
+    $.plot($('#flot-bar-chart'), [barData2], barOptions)
 
     // Flot line chart
     var lineOptions = {
@@ -116,7 +118,7 @@ $(function() {
       }
     ]
 
-    var plotObj = $.plot($('#flot-pie-chart'), data, {
+    var plotObj = $.plot($('#flot-pie-chart'), data, { /* eslint-disable-line no-unused-vars */
       series: {
         pie: {
           show: true
@@ -146,9 +148,9 @@ $(function() {
 
     //
 
-    var data = []
+    data = []
 
-    function getRandomData() {
+    function getRandomData () {
       if (data.length) {
         data = data.slice(1)
       }
@@ -169,7 +171,7 @@ $(function() {
       return res
     }
 
-    series = [
+    series = [ /* eslint-disable-line no-global-assign */
       {
         data: getRandomData(),
         lines: {
@@ -193,7 +195,7 @@ $(function() {
           bottom: 20,
           left: 20
         },
-        markings: function(axes) {
+        markings: function (axes) {
           var markings = []
           var xaxis = axes.xaxis
           for (
@@ -214,7 +216,7 @@ $(function() {
       },
       colors: [config.chart.colorPrimary.toString()],
       xaxis: {
-        tickFormatter: function() {
+        tickFormatter: function () {
           return ''
         }
       },
@@ -229,7 +231,7 @@ $(function() {
 
     // Update the random dataset at 25FPS for a smoothly-animating chart
 
-    setInterval(function updateRandom() {
+    setInterval(function updateRandom () {
       series[0].data = getRandomData()
       plot.setData(series)
       plot.draw()
@@ -1195,26 +1197,26 @@ $(function() {
       [1220911200000, 0.7005]
     ]
 
-    oilprices = []
-    exchangerates = []
+    oilprices = [] /* eslint-disable-line no-global-assign */
+    exchangerates = [] /* eslint-disable-line no-global-assign */
 
-    oilpricesFull.map(function(item, index) {
+    oilpricesFull.map(function (item, index) {
       if (index % 8 === 0) {
         oilprices.push(item)
       }
     })
 
-    exchangeratesFull.map(function(item, index) {
+    exchangeratesFull.map(function (item, index) {
       if (index % 8 === 0) {
         exchangerates.push(item)
       }
     })
 
-    function euroFormatter(v, axis) {
+    function euroFormatter (v, axis) {
       return v.toFixed(axis.tickDecimals) + '€'
     }
 
-    function doPlot(position) {
+    function doPlot (position) {
       $.plot(
         $('#flot-line-chart-multi'),
         [
@@ -1240,7 +1242,7 @@ $(function() {
             },
             {
               // align if we are to the right
-              alignTicksWithAxis: position == 'right' ? 1 : null,
+              alignTicksWithAxis: position === 'right' ? 1 : null,
               position: position,
               tickFormatter: euroFormatter
             }
@@ -1251,7 +1253,6 @@ $(function() {
           colors: [config.chart.colorPrimary.toString()],
           grid: {
             color: '#999999',
-            hoverable: true,
             clickable: true,
             tickColor: '#D4D4D4',
             borderWidth: 0,
@@ -1261,7 +1262,7 @@ $(function() {
             show: true,
             content: '%s for %x was %y',
             xDateFormat: '%y-%m-%d',
-            onHover: function(flotItem, $tooltipEl) {
+            onHover: function (flotItem, $tooltipEl) {
               // console.log(flotItem, $tooltipEl);
             }
           }
@@ -1271,14 +1272,14 @@ $(function() {
 
     doPlot('right')
 
-    $('button').click(function() {
+    $('button').click(function () {
       doPlot($(this).text())
     })
   }
 
   drawFlotCharts()
 
-  $(document).on('themechange', function() {
+  $(document).on('themechange', function () {
     drawFlotCharts()
   })
 })

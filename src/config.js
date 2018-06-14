@@ -5,11 +5,11 @@ var $ref = $('#ref')
 
 // Configure responsive bootstrap toolkit
 config.ResponsiveBootstrapToolkitVisibilityDivs = {
-  xs: $('<div class="device-xs 				  hidden-sm-up"></div>'),
+  xs: $('<div class="device-xs hidden-sm-up"></div>'),
   sm: $('<div class="device-sm hidden-xs-down hidden-md-up"></div>'),
   md: $('<div class="device-md hidden-sm-down hidden-lg-up"></div>'),
   lg: $('<div class="device-lg hidden-md-down hidden-xl-up"></div>'),
-  xl: $('<div class="device-xl hidden-lg-down			  "></div>')
+  xl: $('<div class="device-xl hidden-lg-down"></div>')
 }
 
 ResponsiveBootstrapToolkit.use(
@@ -25,7 +25,7 @@ config.validations = {
   errorElement: 'span',
 
   // add error class
-  highlight: function(element, errorClass, validClass) {
+  highlight: function (element, errorClass, validClass) {
     $(element)
       .parents('div.form-group')
       .addClass(errorClass)
@@ -33,7 +33,7 @@ config.validations = {
   },
 
   // add error class
-  unhighlight: function(element, errorClass, validClass) {
+  unhighlight: function (element, errorClass, validClass) {
     $(element)
       .parents('.has-error')
       .removeClass(errorClass)
@@ -41,7 +41,7 @@ config.validations = {
   },
 
   // submit handler
-  submitHandler: function(form) {
+  submitHandler: function (form) {
     form.submit()
   }
 }

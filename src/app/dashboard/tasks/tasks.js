@@ -1,5 +1,5 @@
-$(function() {
-  $('.actions-list > li').on('click', '.check', function(e) {
+$(function () {
+  $('.actions-list > li').on('click', '.check', function (e) {
     e.preventDefault()
 
     $(this)

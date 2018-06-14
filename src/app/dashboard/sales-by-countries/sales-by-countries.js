@@ -1,11 +1,11 @@
-$(function() {
+$(function () {
   var $dashboardSalesMap = $('#dashboard-sales-map')
 
   if (!$dashboardSalesMap.length) {
     return false
   }
 
-  function drawSalesMap() {
+  function drawSalesMap () {
     $dashboardSalesMap.empty()
 
     var color = config.chart.colorPrimary.toHexString()
@@ -16,7 +16,7 @@ $(function() {
       .darken(10)
       .toHexString()
 
-    var sales_data = {
+    var salesData = {
       us: 2000,
       ru: 2000,
       gb: 10000,
@@ -38,7 +38,7 @@ $(function() {
       selectedColor: selectedColor,
       enableZoom: true,
       showTooltip: true,
-      values: sales_data,
+      values: salesData,
       scaleColors: [color, darkColor],
       normalizeFunction: 'linear'
     })
@@ -46,7 +46,7 @@ $(function() {
 
   drawSalesMap()
 
-  $(document).on('themechange', function() {
+  $(document).on('themechange', function () {
     drawSalesMap()
   })
 })

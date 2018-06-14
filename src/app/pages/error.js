@@ -1,10 +1,10 @@
-$(function() {
+$(function () {
   animate({
     name: 'flipInY',
     selector: '.error-card > .error-title-block'
   })
 
-  setTimeout(function() {
+  setTimeout(function () {
     var $el = $('.error-card > .error-container')
 
     animate({

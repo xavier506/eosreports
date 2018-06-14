@@ -1,9 +1,9 @@
-$(function() {
+$(function () {
   if (!$('#morris-one-line-chart').length) {
     return false
   }
 
-  function drawMorrisCharts() {
+  function drawMorrisCharts () {
     $('#morris-one-line-chart').empty()
 
     Morris.Line({
@@ -57,8 +57,7 @@ $(function() {
           .toString(),
         config.chart.colorPrimary.toString()
       ],
-      lineWidth: 2,
-      pointSize: 1
+      lineWidth: 2
     })
 
     $('#morris-donut-chart').empty()
@@ -137,7 +136,7 @@ $(function() {
 
   drawMorrisCharts()
 
-  $(document).on('themechange', function() {
+  $(document).on('themechange', function () {
     drawMorrisCharts()
   })
 })

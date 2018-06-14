@@ -1,5 +1,5 @@
-module.exports.register = function(handlebars) {
-  handlebars.registerHelper('code', function(options) {
+module.exports.register = function (handlebars) {
+  handlebars.registerHelper('code', function (options) {
     var className = options.hash.lang || ''
 
     // Input html
@@ -15,7 +15,7 @@ module.exports.register = function(handlebars) {
     var numTabs = getNumFrontTabs(lines[0])
 
     // Remove tabs before
-    lines = lines.map(function(line) {
+    lines = lines.map(function (line) {
       return line.substring(numTabs)
     })
 
@@ -30,7 +30,7 @@ module.exports.register = function(handlebars) {
   })
 }
 
-function getNumFrontTabs(line) {
+function getNumFrontTabs (line) {
   var count = 0
   var index = 0
   while (line.charAt(index++) === '\t') {

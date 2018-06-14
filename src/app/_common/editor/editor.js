@@ -1,12 +1,13 @@
-$(function() {
-  $('.wyswyg').each(function() {
+/* globals Quill */
+$(function () {
+  $('.wyswyg').each(function () {
     var $editor = $(this).find('.editor')
     var $toolbar = $(this).find('.toolbar')
 
-    var editor = new Quill($editor.get(0), {
+    var editor = new Quill($editor.get(0), { /* eslint-disable-line no-unused-vars */
       theme: 'snow',
       // modules: {
-      // 	toolbar: toolbarOptions
+      // toolbar: toolbarOptions
       // }
       modules: {
         toolbar: $toolbar.get(0)
@@ -17,11 +18,11 @@ $(function() {
     // var $editor = $(this).find(".editor")
 
     // var editor = new Quill($editor.get(0), {
-    // 	theme: 'snow'
+    //  theme: 'snow'
     // })
 
     // editor.addModule('toolbar', {
-    // 	container: $toolbar.get(0)     // Selector for toolbar container
+    //  container: $toolbar.get(0)     // Selector for toolbar container
     // })
   })
 })

@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
   if (!$('#dashboard-visits-chart').length) {
     return false
   }
@@ -9,7 +9,7 @@ $(function() {
   var el = null
   var item = 'visits'
 
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     el = e.target
     item = $(el)
       .attr('href')
@@ -17,11 +17,11 @@ $(function() {
     switchHistoryCharts(item)
   })
 
-  $(document).on('themechange', function() {
+  $(document).on('themechange', function () {
     switchHistoryCharts(item)
   })
 
-  function switchHistoryCharts(item) {
+  function switchHistoryCharts (item) {
     var chartSelector = '#dashboard-' + item + '-chart'
 
     if ($(chartSelector).has('svg').length) {
@@ -38,7 +38,7 @@ $(function() {
     }
   }
 
-  function drawVisitsChart() {
+  function drawVisitsChart () {
     var dataVisits = [
       { x: '2015-09-01', y: 70 },
       { x: '2015-09-02', y: 75 },
@@ -58,7 +58,7 @@ $(function() {
       labels: ['Visits'],
       xLabels: 'day',
       hideHover: 'auto',
-      yLabelFormat: function(y) {
+      yLabelFormat: function (y) {
         // Only integers
         if (y === parseInt(y, 10)) {
           return y
@@ -72,7 +72,7 @@ $(function() {
     })
   }
 
-  function drawDownloadsChart() {
+  function drawDownloadsChart () {
     var dataDownloads = [
       {
         year: '2006',

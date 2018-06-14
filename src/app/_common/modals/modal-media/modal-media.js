@@ -1,14 +1,14 @@
-var modalMedia = {
+var modalMedia = { /* eslint-disable-line no-unused-vars */
   $el: $('#modal-media'),
   result: {},
   options: {},
-  open: function(options) {
+  open: function (options) {
     options = options || {}
     this.options = options
 
     this.$el.modal('show')
   },
-  close: function() {
+  close: function () {
     if ($.isFunction(this.options.beforeClose)) {
       this.options.beforeClose(this.result)
     }

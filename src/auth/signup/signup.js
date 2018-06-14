@@ -1,5 +1,5 @@
 // SignupForm validation
-$(function() {
+$(function () {
   if (!$('#signup-form').length) {
     return false
   }
@@ -33,20 +33,20 @@ $(function() {
       name: 'firstname lastname',
       pass: 'password retype_password'
     },
-    errorPlacement: function(error, element) {
+    errorPlacement: function (error, element) {
       if (
-        element.attr('name') == 'firstname' ||
-        element.attr('name') == 'lastname'
+        element.attr('name') === 'firstname' ||
+        element.attr('name') === 'lastname'
       ) {
         error.insertAfter($('#lastname').closest('.row'))
         element.parents('div.form-group').addClass('has-error')
       } else if (
-        element.attr('name') == 'password' ||
-        element.attr('name') == 'retype_password'
+        element.attr('name') === 'password' ||
+        element.attr('name') === 'retype_password'
       ) {
         error.insertAfter($('#retype_password').closest('.row'))
         element.parents('div.form-group').addClass('has-error')
-      } else if (element.attr('name') == 'agree') {
+      } else if (element.attr('name') === 'agree') {
         error.insertAfter('#agree-text')
       } else {
         error.insertAfter(element)
@@ -69,7 +69,7 @@ $(function() {
       },
       agree: 'Please accept our policy'
     },
-    invalidHandler: function() {
+    invalidHandler: function () {
       animate({
         name: 'shake',
         selector: '.auth-container > .card'

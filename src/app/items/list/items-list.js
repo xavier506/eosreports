@@ -1,9 +1,9 @@
-$(function() {
+$(function () {
   if (!$('#select-all-items').length) {
     return false
   }
 
-  $('#select-all-items').on('change', function() {
+  $('#select-all-items').on('change', function () {
     var $this = $(this)
       .children(':checkbox')
       .get(0)
@@ -17,8 +17,8 @@ $(function() {
       .change()
   })
 
-  function drawItemsListSparklines() {
-    $('.items-list-page .sparkline').each(function() {
+  function drawItemsListSparklines () {
+    $('.items-list-page .sparkline').each(function () {
       var type = $(this).data('type')
 
       // Generate random data
@@ -37,7 +37,7 @@ $(function() {
 
   drawItemsListSparklines()
 
-  $(document).on('themechange', function() {
+  $(document).on('themechange', function () {
     drawItemsListSparklines()
   })
 })
