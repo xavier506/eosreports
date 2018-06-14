@@ -302,9 +302,9 @@ EOS Costa Rica supports the global and local open source efforts and development
 
 We challenge ourselves to provide the EOS platform with a strong geographical and political diversity by running the most robust EOS Block Producer possible from Costa Rica; We pledge to leverage our talent, experience, and sustainable internet resources to meet such an important challenge.
 
-[eoscostarica.com](https://eoscostarica.com)
+[eoscostarica.com](https://eoscostarica.io)
 
 ## License
 
-MIT © [EOS Costa Rica](https://eoscostarica.com)  
+MIT © [EOS Costa Rica](https://eoscostarica.io)  
 See LICENSE for more info
