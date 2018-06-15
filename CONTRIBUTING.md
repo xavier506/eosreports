@@ -42,7 +42,7 @@ At EOS Costa Rica we use Github's Projects board to prioritize the work and the 
 
 We follow the [open source collaborative ettiquete](https://github.com/rstacruz/collaborative-etiquette/blob/master/README.md#top) and the [standardjs code style](https://standardjs.com).
 
-We use a Kanban-style board with built-in triggers to automatically move issues and pull requests across To do, In progress and Done columns. That's were we prioritize the work. [Go to Project Board](https://github.com/eoscostarica/dmeetup/projects/1).
+We use a Kanban-style board with built-in triggers to automatically move issues and pull requests across To do, In progress and Done columns. That's were we prioritize the work. [Go to Project Board](https://github.com/eoscostarica/eosreports/projects/1).
 
 ![](https://gaboesquivel.com/img/2018/05/github-flow.png)
 
